@@ -4,6 +4,11 @@
  * @author Precious Jatau
  * @version 2019-02-09
  */
+
+/*TODO
+ * 1. Unit test LinkedList class
+ */
+
 public class LinkedList<E>{
 
 	// Node class for linked list elements
@@ -24,6 +29,9 @@ public class LinkedList<E>{
 			next = null;		
 		}
 
+		/**
+		 Getters and setters for node class
+		 */
 		public E getData() {
 			return data;
 		}
@@ -63,7 +71,9 @@ public class LinkedList<E>{
 		currentSize = 0;
 	}
 
-
+	/**
+	 * Getter and setters for LinkedList class
+	 */
 	public Node<E> getHead() {
 		return head;
 	}
@@ -167,6 +177,58 @@ public class LinkedList<E>{
 		++currentSize;
 		temp = null;
 	}
+	
+	/**
+	 * Removes first element of LinkedList and returns its data. Works in O(1) time.
+	 */
+	public E removeFirst() 
+	{
+		// Empty list
+		if (head == null)
+			return null;
+		
+		// Single element list
+		E temp = head.data;
+		if (head == tail) 
+		{
+			head = tail = null;
+		}
+		else // More than 2 elements 
+		{
+			head = head.next;			
+		}
+		--currentSize;
+		return temp;
+	}
+	
+	/**
+	 * Removes last element of LinkedList and returns its data.
+	 */
+	public E removeLast() 
+	{
+		// empty list
+		if (head == null)
+			return null;
+		
+		// single element
+		if (head == tail)
+			return removeFirst();
+		
+		// more than 2 elements
+		Node<E> curr = head;
+		Node<E> prev = null;
+		while(curr != tail) 
+		{
+			prev = curr;
+			curr = curr.next;
+		}
+		
+		prev.next = null;
+		tail = prev;
+		--currentSize;
+		return curr.data;
+		
+	}
 
 
 	// FIXME modify my toString method
@@ -180,7 +242,7 @@ public class LinkedList<E>{
 			outString = outString + "==> " + node.data + "\n";
 			node = node.next;			
 		}
-		outString += "size: " + currentSize + "\n";
+		outString += "size: " + currentSize + "\nhead: " + head.data + "\ntail: " + tail.data;
 
 		return outString;
 	}
@@ -195,8 +257,17 @@ public class LinkedList<E>{
 			ll.addLast(i);
 		}
 
-		System.out.print(ll.toString());
-		System.out.println("head " + ll.getHead().getData());
-		System.out.println("tail " + ll.getTail().getData());
+		System.out.println(ll.toString());
+		
+		Integer rm = ll.removeFirst();
+		System.out.println();
+		System.out.println("Removing first element.");
+		System.out.println(ll.toString());
+		
+		Integer rml = ll.removeLast();
+		System.out.println();
+		System.out.println("Removing last element.");
+		System.out.println(ll.toString());
+		
 	}
 }
