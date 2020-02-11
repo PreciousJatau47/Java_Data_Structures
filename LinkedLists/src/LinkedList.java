@@ -202,7 +202,7 @@ public class LinkedList<E>{
 	}
 	
 	/**
-	 * Removes last element of LinkedList and returns its data.
+	 * Removes last element of LinkedList and returns its data. Works in O(n) time.
 	 */
 	public E removeLast() 
 	{
@@ -226,8 +226,63 @@ public class LinkedList<E>{
 		prev.next = null;
 		tail = prev;
 		--currentSize;
-		return curr.data;
+		return curr.data;		
+	}
+	
+	/**
+	 * Removes node in LinkedList with thesame data as obj. Worst case is O(n)
+	 * @param obj to be used as search key
+	 */
+	public E remove(E obj) 
+	{
+		Node<E> curr = head;
+		Node<E> prev = null;
+				
+		while (curr != null) 
+		{
+			if (((Comparable<E>)obj).compareTo(curr.data) == 0) 
+			{	
+				// obj found at beginning
+				if (curr == head)	
+					return removeFirst();
+				
+				// obj found at end
+				if (curr == tail)
+					return removeLast();
+				
+				// obj found in the middle
+				prev.next = curr.next;
+				--currentSize;
+				return curr.data;	
+			}
+			
+			prev = curr;
+			curr = curr.next;
+		}
 		
+		return null;
+	}
+	
+	/**
+	 * Checks if obj is contained in Linked List. Worst case is O(n)
+	 * @param obj to be used as search key
+	 *  
+	 */
+	public boolean contains(E obj) 
+	{
+		Node<E> curr = head;
+				
+		while (curr != null) 
+		{
+			if (((Comparable<E>)obj).compareTo(curr.data) == 0) 
+			{	
+				return true;
+			}
+			
+			curr = curr.next;
+		}
+
+		return false;
 	}
 
 
@@ -248,11 +303,12 @@ public class LinkedList<E>{
 	}
 
 
+		
 	public static void main(String[] args) 
 	{
 		LinkedList<Integer> ll = new LinkedList<Integer>();
 
-		for (int i = 0; i < 5; ++i) 
+		for (int i = 0; i < 7; ++i) 
 		{
 			ll.addLast(i);
 		}
@@ -268,6 +324,7 @@ public class LinkedList<E>{
 		System.out.println();
 		System.out.println("Removing last element.");
 		System.out.println(ll.toString());
+				
 		
 	}
 }
