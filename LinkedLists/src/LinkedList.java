@@ -8,8 +8,10 @@
 /*TODO
  * 1. Unit test LinkedList class
  */
+import java.util.*;
 
-public class LinkedList<E>{
+
+public class LinkedList<E> {
 
 	// Node class for linked list elements
 	class Node<E>
@@ -180,6 +182,7 @@ public class LinkedList<E>{
 	
 	/**
 	 * Removes first element of LinkedList and returns its data. Works in O(1) time.
+	 * @return first node.
 	 */
 	public E removeFirst() 
 	{
@@ -203,6 +206,7 @@ public class LinkedList<E>{
 	
 	/**
 	 * Removes last element of LinkedList and returns its data. Works in O(n) time.
+	 * @return last node.
 	 */
 	public E removeLast() 
 	{
@@ -231,7 +235,8 @@ public class LinkedList<E>{
 	
 	/**
 	 * Removes node in LinkedList with thesame data as obj. Worst case is O(n)
-	 * @param obj to be used as search key
+	 * @param obj to be used as search key.
+	 * @return node with same data as object.
 	 */
 	public E remove(E obj) 
 	{
@@ -266,7 +271,7 @@ public class LinkedList<E>{
 	/**
 	 * Checks if obj is contained in Linked List. Worst case is O(n)
 	 * @param obj to be used as search key
-	 *  
+	 * @return true(false) obj is found(not found) 
 	 */
 	public boolean contains(E obj) 
 	{
@@ -283,6 +288,28 @@ public class LinkedList<E>{
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Peeks at the first node's data in the LinkedList.
+	 * @return data for first node
+	 */
+	public E peekFirst() 
+	{
+		if (head == null)
+				return null;
+		return head.data;
+	};
+	
+	/**
+	 * Peeks at the last node's data in the LinkedList
+	 * @return data for last node.
+	 */
+	public E peekLast() 
+	{
+		if (tail == null)
+			return null;
+		return tail.data;
 	}
 
 
@@ -325,6 +352,10 @@ public class LinkedList<E>{
 		System.out.println("Removing last element.");
 		System.out.println(ll.toString());
 				
+		System.out.println("Peek first");
+		System.out.println(ll.peekFirst());
 		
+		System.out.println("Peek last");
+		System.out.println(ll.peekLast());
 	}
 }
