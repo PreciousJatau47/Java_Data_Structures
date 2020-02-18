@@ -2,18 +2,42 @@ import java.util.Collections;
 import org.junit.Assert;
 import org.junit.Test;
 
-/*
- * TODO
- * 1. Need node class in package
-*/
-
 /**
  * Testing class for LinkedList
  * 
  * @author Precious Jatau
  * @version 2019-02-11
  */
+
+/*
+ * TODO
+ * 1. Node constructor (completed)
+ * 2. size (completed)
+ * 3. addLast, removeLast (completed)
+ * 4. remove
+ * 5. contains (completed)
+ * 6. peekFirst
+ * 7. peekLast 
+ * 8. addLastSlow
+ * 
+*/
+
+
 public class LinkedListTest {
+	
+	
+	/**
+	 * Test the node constructor 
+	 */
+	@Test
+	public void nodeConstructor() 
+	{
+		LinkedList<Integer> ll = new LinkedList<Integer>();
+		LinkedList<Integer>.Node<Integer> node = ll.new Node<Integer>(2);
+		
+		Assert.assertEquals("Node constructor correct", node.getData().intValue(), 2);
+	}
+	
 	
 	/**
 	 * Test the empty LinkedList constructor 
@@ -22,27 +46,82 @@ public class LinkedListTest {
 	public void emptyConstructorTest()
 	{
 		LinkedList<Integer> ll = new LinkedList();
-		Assert.assertEquals("LinkedList created correctly", ll.getHead(), null);
-		Assert.assertEquals("LinkedList created correctly", ll.getTail(), null);
-		Assert.assertEquals("LinkedList created correctly", ll.getCurrentSize(), 0);
+		Assert.assertEquals("Wrong head returned for LinkedList empty constructor", null, ll.getHead());
+		Assert.assertEquals("Wrong tail returned for LinkedList empty constructor", null, ll.getTail());
+		Assert.assertEquals("Wrong size returned for LinkedList empty constructors", 0, ll.getCurrentSize());
 	}
 	
 	/**
-	 * Test addFirst
+	 * Test addFirst(), removeFirst() methods
 	 */
 	@Test
-	public void addFirstTest() 
+	public void addRemoveFirstTest() 
 	{
+		int numElements = 100;
 		LinkedList<Integer> ll = new LinkedList();
 		
-		for (int i = 0; i < 5; ++i) 
+		for (int i = 0; i < numElements; ++i) 
 		{
 			ll.addFirst(i);
-			// ll contains 4,3,2,1,0
+			// ll contains 99, 98, 97, ... 0
 		}
-		// remove elements and compare
+		Assert.assertEquals("LinkedList has incorrect correct size after addFirst.", numElements, ll.getCurrentSize());
 		
-		//Assert.assertEquals("LinkedList created correctly", ll.getHead(), null);
+		// remove elements and compare
+		for (int i = numElements - 1; i >= 0; --i) 
+		{
+			Assert.assertEquals("Wrong output for removeFirst", i, ll.removeFirst().intValue());
+		}
+		
+		Assert.assertEquals("LinkedList has incorrect size after removeFirst.", 0, ll.getCurrentSize());
 	}
-
+	
+	/**
+	 * Test addLast(), removeLast() methods
+	 */
+	@Test
+	public void addLastFirstLastTest() 
+	{
+		int numElements = 100;
+		LinkedList<Integer> ll = new LinkedList();
+		
+		
+		for (int i = 0; i < numElements; ++i) 
+		{
+			ll.addLast(i);
+			// ll contains 0,1,2,...,99
+		}
+		Assert.assertEquals("LinkedList has incorrect correct size after addLast.", numElements, ll.getCurrentSize());
+		
+		// remove last elements and compare
+		for (int i = numElements - 1; i >= 0; --i) 
+		{
+			Assert.assertEquals("Wrong output for removeLast", i, ll.removeLast().intValue());
+		}
+		
+		Assert.assertEquals("LinkedList has incorrect size after removeLast.", 0, ll.getCurrentSize());
+	}
+	
+	/**
+	 * Test remove() method
+	 */
+	
+	
+	/**
+	 * Test contains() method
+	 */
+	@Test
+	public void containsTest() 
+	{
+		LinkedList<Integer> ll = new LinkedList<Integer>();
+		Assert.assertFalse(ll.contains(2));
+		
+		ll.addLast(3);
+		Assert.assertFalse(ll.contains(2));
+		
+		ll.addLast(2);
+		Assert.assertTrue(ll.contains(2));
+		
+	}
+	
 }
