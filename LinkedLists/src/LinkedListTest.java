@@ -19,7 +19,7 @@ import org.junit.Test;
  * 6. peekFirst
  * 7. peekLast 
  * 8. addLastSlow
- * 
+ * 9. iterator
 */
 
 
@@ -121,6 +121,29 @@ public class LinkedListTest {
 		
 		ll.addLast(2);
 		Assert.assertTrue(ll.contains(2));
+		
+	}
+	
+	/**
+	 * Test LinkedList Iterator
+	 */
+	@Test
+	public void IteratorTest() 
+	{
+		LinkedList<Integer> ll = new LinkedList<Integer>();
+
+		for (int i = 0; i < 7; ++i) 
+		{
+			ll.addLast(i);
+			// contains 0,1,2,...6
+		}
+		
+		int expected = 0;
+		for (int data: ll) 
+		{
+			Assert.assertEquals("Iterator returns wrong data.", expected, data);
+			++expected;
+		}
 		
 	}
 	

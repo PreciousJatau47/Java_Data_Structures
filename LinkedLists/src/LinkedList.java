@@ -11,7 +11,7 @@
 import java.util.*;
 
 
-public class LinkedList<E> {
+public class LinkedList<E> implements Iterable<E>{
 
 	// Node class for linked list elements
 	class Node<E>
@@ -52,6 +52,44 @@ public class LinkedList<E> {
 
 	}
 	// end of Node class
+	
+	
+	//Iterator Helper class
+	public class IteratorHelper implements Iterator<E>
+	{
+		// stores current node for iteration
+		private Node<E> index;
+		
+		/**
+		 * Initializes index to head of LinkedList
+		 */
+		public IteratorHelper() 
+		{
+			index = head;
+		}
+		
+		/**
+		 * Returns true (false) if index is not null (null)
+		 */
+		public boolean hasNext() 
+		{
+			return index != null;
+		}
+		
+		/**
+		 * Returns current node and move to next node
+		 */
+		public E next()
+		{
+			if (!hasNext())
+				throw new NoSuchElementException();
+			
+			E val = index.data;
+			index = index.next;
+			
+			return val;
+		}
+	}// end of IteratorHelper class
 
 	// head points to first element in list 
 	private Node<E> head;
@@ -311,9 +349,21 @@ public class LinkedList<E> {
 			return null;
 		return tail.data;
 	}
+	
+	/**
+	 * LinkedList iterator
+	 * @return IteratorHelper object .
+	 */
+	public Iterator<E> iterator()
+	{
+		return new IteratorHelper();
+	}
 
 
-	// FIXME modify my toString method
+	/**
+	 * Creates summary of LinkedList
+	 * @return string describing list
+	 */
 	public String toString() 
 	{
 		String outString = "";
@@ -340,22 +390,9 @@ public class LinkedList<E> {
 			ll.addLast(i);
 		}
 
-		System.out.println(ll.toString());
-		
-		Integer rm = ll.removeFirst();
-		System.out.println();
-		System.out.println("Removing first element.");
-		System.out.println(ll.toString());
-		
-		Integer rml = ll.removeLast();
-		System.out.println();
-		System.out.println("Removing last element.");
-		System.out.println(ll.toString());
-				
-		System.out.println("Peek first");
-		System.out.println(ll.peekFirst());
-		
-		System.out.println("Peek last");
-		System.out.println(ll.peekLast());
+		for (Integer node: ll) 
+		{
+			System.out.println(node);
+		}
 	}
 }
