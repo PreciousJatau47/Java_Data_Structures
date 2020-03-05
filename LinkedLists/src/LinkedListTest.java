@@ -14,12 +14,12 @@ import org.junit.Test;
  * 1. Node constructor (completed)
  * 2. size (completed)
  * 3. addLast, removeLast (completed)
- * 4. remove
+ * 4. remove (completed)
  * 5. contains (completed)
  * 6. peekFirst
  * 7. peekLast 
  * 8. addLastSlow
- * 9. iterator
+ * 9. iterator (completed)
 */
 
 
@@ -105,7 +105,23 @@ public class LinkedListTest {
 	/**
 	 * Test remove() method
 	 */
-	
+	@Test
+	public void removeTest() 
+	{
+		LinkedList<Integer> ll = new LinkedList<Integer>();
+		
+		// empty list should return null
+		Assert.assertNull(ll.remove(1));
+		
+		for (int i = 0; i < 4; ++i) 
+		{
+			ll.addLast(i);
+			// contains 0,1,2,3
+		}
+		
+		Assert.assertNull(ll.remove(5));
+		Assert.assertEquals("Wrong object returned by remove method.", 3, ll.remove(3).intValue());
+	}
 	
 	/**
 	 * Test contains() method

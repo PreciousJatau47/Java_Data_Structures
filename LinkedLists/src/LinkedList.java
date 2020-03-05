@@ -2,7 +2,7 @@
  * Class that implements a LinkedList data structure.
  * 
  * @author Precious Jatau
- * @version 2019-02-09
+ * @version 2020-02-09
  */
 
 /*TODO
@@ -379,20 +379,4 @@ public class LinkedList<E> implements Iterable<E>{
 		return outString;
 	}
 
-
-		
-	public static void main(String[] args) 
-	{
-		LinkedList<Integer> ll = new LinkedList<Integer>();
-
-		for (int i = 0; i < 7; ++i) 
-		{
-			ll.addLast(i);
-		}
-
-		for (Integer node: ll) 
-		{
-			System.out.println(node);
-		}
-	}
 }
