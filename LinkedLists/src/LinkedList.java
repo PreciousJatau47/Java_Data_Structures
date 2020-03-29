@@ -10,6 +10,12 @@
  */
 import java.util.*;
 
+/**
+ * TODO
+ * 1. isEmpty()
+ * 2. isFull()
+ */
+
 
 public class LinkedList<E> implements Iterable<E>{
 

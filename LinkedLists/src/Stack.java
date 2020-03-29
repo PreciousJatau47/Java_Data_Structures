@@ -37,6 +37,7 @@ public class Stack<E>
 	/**
 	 * Checks if Stack is empty
 	 * @return True(False) if stack is empty(non-empty)
+	 * O(1) time
 	 */
 	public boolean isEmpty() 
 	{
@@ -47,6 +48,7 @@ public class Stack<E>
 	/**
 	 * Push new element to top of stack
 	 * @return True(False) if successful (fail)
+	 * O(1) time
 	 */
 	
 	public boolean push(int x) 
@@ -67,6 +69,7 @@ public class Stack<E>
 	/**
 	 * Removes top element that was pushed to stack array
 	 * @return element(or INTEGER.MIN_VALUE) if stack is non-empty (empty)
+	 * O(1) time
 	 */
 	public int pop() 
 	{
@@ -101,7 +104,9 @@ public class Stack<E>
 	}
 	
 	/**
-	 * Returns top element from stack array
+	 * Returns top element from stack array. 
+	 * @return top element
+	 * O(1) time
 	 */
 	public int peek() 
 	{
@@ -148,6 +153,7 @@ public class Stack<E>
 		
 		System.out.println("Expected stack underflow");
 		stk.pop();
+		
 	}
 	
 	
