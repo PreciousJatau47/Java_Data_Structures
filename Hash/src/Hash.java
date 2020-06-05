@@ -10,17 +10,12 @@ import java.util.LinkedList;
  */
 
 /*TODO
- * add() - completed
- * remove() - completed
- * keyIterator() - completed
- * keyIterator Test
- * ConstructorTest() -completed
- * resize() - in progress
- * getValue()
+ * removeTEst
+ * loadFactorTest
  */
 
 
-public class Hash<K,V>{
+public class Hash<K,V> implements Iterable<K>{
 
 	class HashElement<K,V> implements Comparable<HashElement<K,V>>
 	{
@@ -124,7 +119,7 @@ public class Hash<K,V>{
 		// resize if at maxLoadFactor
 		if (loadFactor() > maxLoadFactor) 
 		{
-			resize();
+			resize(tableSize *2);
 		}
 
 		// create HashElement
@@ -150,9 +145,38 @@ public class Hash<K,V>{
 		
 		// find index of element
 		int hashVal = key.hashCode() & 0x7FFFFFFF % tableSize;
-		hArray[hashVal].remove(he);
+		
+		System.out.println("Removing " + he.key);
+		System.out.println(hArray[hashVal].remove(he));
+		
+		System.out.println("Remaining elements");
+		System.out.println("->" + hArray[hashVal]);
+		System.out.println("####");
 		
 		return true;
+	}
+	
+	
+	/** Gets value given
+	 * @param key
+	 * @return value
+	 */
+	public V getValue(K key) 
+	{
+		// find index
+		int hashVal = key.hashCode() & 0x7FFFFFFF % tableSize;
+		
+		// search ll at index
+		for(HashElement<K,V> he:hArray[hashVal]) 
+		{
+			if (((Comparable<K>)key).compareTo(he.key) == 0) 
+			{
+				return he.value;
+			}
+		}
+		
+		//return null if key is not found
+		return null;
 	}
 
 	/**Resizes hash array and rehashed elements
@@ -170,26 +194,36 @@ public class Hash<K,V>{
 		}
 		
 		// rehash elements
-		
-		
 		// iterate through keys
-		// find position in newArray
-		// insert in newArray
+		int hashVal;
+		for (K key: this) 
+		{
+			// get value
+			V val = getValue(key);
+			
+			// create HashElement
+			HashElement<K,V> he = new HashElement(key, val);
+			
+			// find position in newArray
+			hashVal = key.hashCode() & 0x7FFFFFFF % newSize;
+			
+			// insert he in newArray
+			newArray[hashVal].add(he);
+		}
 
-
-
-		// update hArray
-
-		// update tableSize
+		// update hArray, tableSize
+		hArray = newArray;
+		tableSize = newSize;
 	}
 
 	/** Hash Iterator
 	 * @return IteratorHelper object
 	 */
-	public Iterator<K> Iterator()
+	public Iterator<K> iterator()
 	{
 		return new IteratorHelper();
 	}
+	
 	
 	
 	/**Iterates through hash and store keys in array
@@ -239,7 +273,7 @@ public class Hash<K,V>{
 	 * */
 	public double loadFactor() 
 	{
-		return (numElements/tableSize);
+		return (numElements/(double)tableSize);
 	}
 	
 	public static void main(String[] args) 
@@ -247,6 +281,7 @@ public class Hash<K,V>{
 		Integer x = new Integer(6);
 		System.out.println(x.hashCode());
 		// Integer objects hashCode() is it's int value.
+		
 	}
 
 
