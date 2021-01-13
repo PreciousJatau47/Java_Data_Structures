@@ -1,5 +1,8 @@
 import java.util.LinkedList;
 
+import org.junit.Assert;
+
+
 /**
  * Class for binary trees
  * @author Precious Jatau
@@ -12,11 +15,12 @@ import java.util.LinkedList;
  * 2. add (completed)
  * 3. contains (completed)
  * 4. BFS(in progress)
- * 5. remove
+ * 5. remove. update numNodes
  * 6. leftRotate
  * 7. rightRotate
  * 8. leftRightRotate
  * 9. rightLeftRotate
+ * 10. need size.
  * */
 
 public class Trees<T>{
@@ -38,10 +42,12 @@ public class Trees<T>{
 	
 	
 	Node<T> root;
+	int numNodes;
 	
 	// Default constructor for tree
 	public Trees() {
 		root = null;
+		numNodes = 0;
 	}
 	
 	/**Adds a new node to the tree
@@ -51,8 +57,11 @@ public class Trees<T>{
 	public void add(T obj) {
 		
 		// empty tree
-		if (root == null)
+		if (root == null) 
+		{
 			root = new Node<T>(obj);
+			++numNodes;
+			}
 		else // non-empty tree
 			add(obj, root);
 	}
@@ -69,6 +78,7 @@ public class Trees<T>{
 		{
 			if (node.right == null) {
 				node.right = new Node<T>(obj);
+				++numNodes;
 				return;
 			}
 		
@@ -78,6 +88,7 @@ public class Trees<T>{
 		{
 			if (node.left == null) {
 				node.left = new Node<T>(obj);
+				++numNodes;
 				return;
 			}
 			
@@ -133,20 +144,36 @@ public class Trees<T>{
 	 * */
 	public void BFS(Node<T> node) {
 		
+		// Initialize variables
 		LinkedList<Node<T>> queue = new LinkedList<Node<T>>();
+		boolean visited[] = new boolean[getSize()]; 
+		Node<T> prev[] = (Node<T>[]) new Object[getSize()];
+		
+		// BFSHelper
+		BFSHelper(node, queue, visited, prev);
+		
+		// iterate through neighbours, enqueue if not visited, update visited/prev status
+		
+		// reconstruct path
 		
 				
 			
 	}
 	
-	/*
-	public void BFSHelper(Node<T> node, LinkedList<Node<T>> queue) {
+	/** enqueue current node and its neighbors.
+	 * @param node
+	 * @param queue
+	 * @param visited. boolean array indicating which nodes have been visited.
+	 * @param prev. Node array indicating previous node for each visited node.
+	 * */
+	public void BFSHelper(Node<T> node, LinkedList<Node<T>> queue, boolean[] visited, Trees<T>.Node<T>[] prev) {
 		
 		// base case
 		if (node == null)
 			return;
 		
 		queue.add(node);
+		visited[(int)node.data] = true;
 				
 		while (!queue.isEmpty()) {
 			// remove, print current data
@@ -158,11 +185,33 @@ public class Trees<T>{
 			queue.add(node.right);
 			}
 	}
-	*/
+	
+	/**Returns number of nodes in tree.
+	 * @ return numNodes.
+	 * */
+	public int  getSize() 
+	{
+		return numNodes;
+	}
 	
 	public static void main(String[] args) 
 	{
-		System.out.println("In Trees' main.");
+		// Initialize tree
+		Trees<Integer> myTree = new Trees(); 
+
+		// Assert that tree is empty
+		Assert.assertNull("Tree is not empty!", myTree.root);		
+
+		// Create nodes
+		Trees<Integer>.Node<Integer> two = myTree.new Node<Integer>(2);		// would be root
+		Trees<Integer>.Node<Integer> three = myTree.new Node<Integer>(3);	// would be right child
+		Trees<Integer>.Node<Integer> one = myTree.new Node<Integer>(1);		// would be left child
+
+		// Add nodes, check if tree contains added node.
+		myTree.add(two.data);
+		myTree.add(three.data);
+		myTree.add(one.data);
+		System.out.println(myTree.getSize());
 	}
 
 

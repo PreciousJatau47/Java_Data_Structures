@@ -5,9 +5,11 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 /* TODO
- * 1. testcontains() - completed
+ * 1. testcontains() (completed)
  * 2. testNode()
  * 3. testTrees()
+ * 4a. testGetSize - add (completed)
+ * 4b. testGetSize - remove
  * */
 
 
@@ -46,7 +48,28 @@ class TreesTest {
 		myTree.add(one.data);
 		Assert.assertTrue("Added node not found in tree!", myTree.contains(three));
 		
+	}
+	
+	@Test
+	void testGetSize() 
+	{
+		// Initialize tree
+		Trees<Integer> myTree = new Trees(); 
 
+		// Assert that tree is empty
+		Assert.assertNull("Tree is not empty!", myTree.root);		
+
+		// Create nodes
+		Trees<Integer>.Node<Integer> two = myTree.new Node<Integer>(2);		// would be root
+		Trees<Integer>.Node<Integer> three = myTree.new Node<Integer>(3);	// would be right child
+		Trees<Integer>.Node<Integer> one = myTree.new Node<Integer>(1);		// would be left child
+
+		// Add nodes, check if tree contains added node.
+		myTree.add(two.data);
+		myTree.add(three.data);
+		myTree.add(one.data);
+
+		Assert.assertTrue("Wrong number of nodes obtained from getSize().", myTree.getSize() == 3);
 	}
 
 }
