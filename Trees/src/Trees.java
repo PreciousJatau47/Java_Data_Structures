@@ -10,8 +10,8 @@ import java.util.LinkedList;
 /* TODO
  * 1. Node class (completed)
  * 2. add (completed)
- * 3. BFS(in progress)
- * 4. contains (in progress)
+ * 3. contains (completed)
+ * 4. BFS(in progress)
  * 5. remove
  * 6. leftRotate
  * 7. rightRotate
@@ -162,20 +162,7 @@ public class Trees<T>{
 	
 	public static void main(String[] args) 
 	{
-		LinkedList<Integer> a = new LinkedList<Integer> ();
-		a.addFirst(1);
-		a.addLast(3);
-		a.addFirst(6);
-		// 6,1,3		
-		
-		
-		System.out.println("Testing main.");
-		
-		for (int i:a) 
-		{
-			System.out.println(i);
-		}
-		
+		System.out.println("In Trees' main.");
 	}
 
 
