@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.*;
 
 import org.junit.Assert;
 
@@ -126,7 +127,7 @@ public class Trees<T>{
 		}
 		
 		// check right child
-		if (((Comparable<T>) target.data).compareTo(base.data) > 0) // target found 
+		if (((Comparable<T>) target.data).compareTo(base.data) > 0) 
 		{
 			return contains(target,base.right);
 		}
@@ -137,30 +138,44 @@ public class Trees<T>{
 	}
 	
 	
-	/**Performs Breadth First Search (BFS) on the tree.
-	 * @param start. Node from which to start BFS
-	 * @param target. Node to be found.
+	/**Performs Breadth First Search (BFS) on the binary tree always starting from the root
+	 * @param node. Node to be found.
 	 * @return node list for path traversed from start to target or null is target node is not found.
 	 * */
 	public void BFS(Node<T> node) {
 		
-		// Initialize variables
+		// 1. Solve BFS
+		// Initialize queue, add node
 		LinkedList<Node<T>> queue = new LinkedList<Node<T>>();
-		boolean visited[] = new boolean[getSize()]; 
-		Node<T> prev[] = (Node<T>[]) new Object[getSize()];
+		queue.addLast(node);
 		
-		// BFSHelper
-		BFSHelper(node, queue, visited, prev);
+		// Initialize visited, prev
+		HashMap<Node<T>,Boolean> visited = new HashMap<Node<T>,Boolean> ();
+		visited.put(node, true);
+		HashMap<T,T> prev = new HashMap<T,T>();
 		
-		// iterate through neighbours, enqueue if not visited, update visited/prev status
+		// while queue is not empty
+		while (!queue.isEmpty()) 
+		{
+			// remove top element
+			Node<T> next = queue.removeFirst();
+			
+			// get neighbors
+			// for each neighbor
+				// if not visited, add to queue. Update visited, prev.
+		}
 		
-		// reconstruct path
+		
+		
+
+		}
+	
 		
 				
 			
-	}
 	
-	/** enqueue current node and its neighbors.
+	
+	/** actually performs the bread first search
 	 * @param node
 	 * @param queue
 	 * @param visited. boolean array indicating which nodes have been visited.
@@ -169,21 +184,18 @@ public class Trees<T>{
 	public void BFSHelper(Node<T> node, LinkedList<Node<T>> queue, boolean[] visited, Trees<T>.Node<T>[] prev) {
 		
 		// base case
-		if (node == null)
-			return;
+		// if node has not been visited
+		// add node to bottom of queue
+		// update prev, visited
 		
-		queue.add(node);
-		visited[(int)node.data] = true;
-				
-		while (!queue.isEmpty()) {
-			// remove, print current data
-			node = queue.poll();
-			System.out.print(node.data);
-					
-			// add all neighbors
-			queue.add(node.left);
-			queue.add(node.right);
-			}
+		// while queue is non empty
+		// pull node from top of queue
+		
+		// for each neighbor
+		// add node to queue
+		// 
+		
+		
 	}
 	
 	/**Returns number of nodes in tree.
@@ -212,6 +224,15 @@ public class Trees<T>{
 		myTree.add(three.data);
 		myTree.add(one.data);
 		System.out.println(myTree.getSize());
+		
+		// Hash map test
+		HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
+		hm.put(1, 1);
+		hm.put(2, 2);
+		System.out.println("Hash map contains "+ hm);
+
+		
+		
 	}
 
 
